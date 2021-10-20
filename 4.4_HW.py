@@ -18,8 +18,10 @@ class Country_iterator:
         return self.my_json[self.start]['name']['common']
 
 if __name__ == '__main__':
+    url = "https://en.wikipedia.org/wiki/"
     for i in Country_iterator('countries.json'):
-        pprint(f'Город {i} - https://en.wikipedia.org/wiki/{i}')
+        namefix = i.replace(" ", "_")
+        pprint(f'Город {i} - {url}{namefix}')
 
 
 
