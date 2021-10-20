@@ -20,11 +20,11 @@ class Country_iterator:
 
 if __name__ == '__main__':
     url = "https://en.wikipedia.org/wiki/"
-    namefix = i.replace(" ", "_")
-    url_city = url + namefix
-    pprint(f'Город {i} - {url_city}')
-    hash_object = hashlib.md5(b'{url_city}')
-    pprint(hash_object.hexdigest())
-
+    for i in Country_iterator('countries.json'):
+        namefix = i.replace(" ", "_")
+        url_city = url + namefix
+        pprint(f'Город {i} - {url_city}')
+        hash_object = hashlib.md5(b'{url_city}')
+        pprint(hash_object.hexdigest())
 
 
