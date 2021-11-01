@@ -1,9 +1,11 @@
+import os
 import json
 from pprint import pprint
 import hashlib
 
-class Country_iterator:
-    def __init__(self, file_json):
+
+class Country_Iterator:
+    def __init__(self, json_file):
         with open(file_json, 'r') as file:
             self.my_json = json.load(file)
         self.start = -1
@@ -17,23 +19,20 @@ class Country_iterator:
         if self.start == self.end:
             raise StopIteration
         return self.my_json[self.start]['name']['common']
-   
+
+
 if __name__ == '__main__':
-  city_list = []
-  url = "https://en.wikipedia.org/wiki/"
-  for i in Country_iterator('countries.json'):
-    namefix = i.replace(" ", "_")
-    url_city = url + namefix
-    # pprint(f'Город {i} - {url_city}')
-    city_list. append(url_city)
+    def generate(path):
+        with open(path) as file:
+            for line in file:
+                yield line.upper()
 
-            
-  def gen():
-    for line in city_list:
-      yield line.upper()
-      
-  for item in gen():
-    hash_object = hashlib.md5(b'item')
-    pprint(hash_object.hexdigest())   
-    pprint(item)
-
+    url = "https://en.wikipedia.org/wiki/"
+    file_json = os.path.join(os.getcwd(), "countries.json")
+    for name_country in Country_Iterator(file_json):
+        name_fix = url + name_country.replace(" ", "_")
+        pprint(f'Город {name_country} - {name_fix}')
+        hash_object = hashlib.md5(b'{name_fix}')
+        print(hash_object.hexdigest())
+    for enemy in generate(file_json):
+        print(enemy.split())
