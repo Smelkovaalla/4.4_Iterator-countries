@@ -42,3 +42,13 @@ if __name__ == '__main__':
         hash_object = hashlib.md5(b'{enemy}')
         print(hash_object.hexdigest())
 
+    def generator_h(file):
+        with open(file, encoding='UTF-8') as f2:
+            line = (i.strip() for i in f2.readlines())
+            for i in line:
+                i_hash = hashlib.md5(i.encode())
+                yield i_hash.hexdigest()
+
+    g = generator_h(file_json)
+    for i in g:
+        print(i)
